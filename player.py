@@ -11,3 +11,10 @@ class player:
         :return: board position
         """
         pass
+
+    def get_next_move(self):
+        """
+        Asks user for next move
+        :return: board position
+        """
+        pass
