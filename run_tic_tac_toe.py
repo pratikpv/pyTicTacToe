@@ -13,16 +13,18 @@ def main():
     winner = None
     b = board(p1, p2)
     while True:
-        if b.is_game_over():
-            winner = b.get_winner()
-            print('The Winner is: {}\n Game Over.'.format(winner._name))
-            break
         b.print_header()
         b.print_board()
         move = b.get_move()
         while not b.is_move_valid(move):
             move = b.get_move()
         b.set_move(move)
+        if b.is_game_over() or b.is_winning_pattern_found():
+            winner = b.get_winner()
+            b.print_board()
+            print('The Winner is: {}\n Game Over.'.format(winner._name))
+            break
+        b.swap_player()
 
 
 if __name__ == "__main__":
