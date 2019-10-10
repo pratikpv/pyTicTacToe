@@ -5,7 +5,7 @@ class board:
 
     def __init__(self, p1: player, p2: player):
         self._p1 = p1
-        self._p1 = p2
+        self._p2 = p2
         self._grid = [' '] * 10
         # player 1 starts first
         self._turn = p1
@@ -16,8 +16,9 @@ class board:
         :return: None
         """
         for i in range(1, 4):
-            print('  {0:<1} | {1:<1} | {2:<1}'.format(self._grid[3 * (i - 1) + 0], self._grid[3 * (i - 1) + 1],
-                                                      self._grid[3 * (i - 1) + 2]))
+            # print('  {0:<1} | {1:<1} | {2:<1}'.format(self._grid[3 * (i - 1) + 0], self._grid[3 * (i - 1) + 1],
+            print('  {} | {} | {}'.format(self._grid[3 * (i - 1) + 1], self._grid[3 * (i - 1) + 2],
+                                          self._grid[3 * (i - 1) + 3]))
             if i < 3:
                 print(' -----------')
 
@@ -27,11 +28,11 @@ class board:
         :return: None
         """
         print('Sample board layout')
-        sample_grid = list(range(1, 10))
+        sample_grid = list(range(10))
         for i in range(1, 4):
             # print('  {0:<1} | {1:<1} | {2:<1}'.format(sample_grid[i][0], sample_grid[i][1], sample_grid[i][2]))
-            print('  {0:<1} | {1:<1} | {2:<1}'.format(sample_grid[3 * (i - 1) + 0], sample_grid[3 * (i - 1) + 1],
-                                                      sample_grid[3 * (i - 1) + 2]))
+            print('  {0:<1} | {1:<1} | {2:<1}'.format(sample_grid[3 * (i - 1) + 1], sample_grid[3 * (i - 1) + 2],
+                                                      sample_grid[3 * (i - 1) + 3]))
             if i < 3:
                 print(' -----------')
 
@@ -61,7 +62,15 @@ class board:
         :param pos: board position
         :return: True if move is valid, else False
         """
-        return False
+        return self._grid[pos] == ' '
 
     def set_move(self, pos: int):
-        pass
+        if self.is_move_valid(pos):
+            self._grid[pos] = self._turn._symbol
+            # swap the turns now
+            if self._turn == self._p1:
+                self._turn = self._p2
+            else:
+                self._turn = self._p1
+        else:
+            raise Exception('Invalid move')

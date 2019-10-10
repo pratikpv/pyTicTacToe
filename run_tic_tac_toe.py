@@ -22,7 +22,6 @@ def main():
         move = b.get_move()
         while not b.is_move_valid(move):
             move = b.get_move()
-
         b.set_move(move)
 
 

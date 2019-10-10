@@ -17,4 +17,4 @@ class player:
         Asks user for next move
         :return: board position
         """
-        pass
+        return int(input('Enter your move: '))
